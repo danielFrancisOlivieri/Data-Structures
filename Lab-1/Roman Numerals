@@ -116,7 +116,6 @@ while (start) {
 cout << "Please input a Roman Numeral. Make sure to only use the letters M, D, C, L, X, V and I (it's not case sensitive)." << endl;
 cin >> userInput;
 
-cout << userInput.find_first_not_of("MDCLXVImdclxvi") << "||||||" << endl;
 
  while ((userInput.find_first_not_of("MDCLXVImdclxvi") < 40)) //this leads into the error message;
     {
