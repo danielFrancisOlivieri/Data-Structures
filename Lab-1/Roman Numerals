@@ -1,3 +1,6 @@
+//Roman numeral for lab 1
+//this program inputs roman numerals and can convert them into decimal form
+// it can also print those two things out
 #include <iostream>
 
 using namespace std;
@@ -7,18 +10,24 @@ string romanNumeral = "CCCLIX"; // holds roman numeral
 int decimal = 5; // holds digits
 // prints decimal
 public: printDecimal() {
-cout << decimal << endl;
+cout << "Here is your number in decimal form: " << decimal << endl;
+cout << endl;
 };
 // prints roman
 public: printRoman() {
-cout << romanNumeral << endl;
+cout << "Here is your number in Roman numeral form: " << romanNumeral << endl;
+cout << endl;
 };
+public: void getNumeral(string inputtedNumeral) {
+romanNumeral = inputtedNumeral;
+
+}
+
 
 // precon: has romanNumeral value
 // romanNumeral value must consist of: M, D, C, L, X, V, I
 // postcon: decimal = value of roman numeral
-
-public: convert2Decimal() {
+convert2Decimal() {
 int i = romanNumeral.length() - 1;
 int previous = 0;
 char numeral;
@@ -62,6 +71,31 @@ case 'D':
 case 'M':
     digit = 1000;
     break;
+
+    case 'i':
+    digit = 1;
+break;
+case 'v':
+    digit = 5;
+    break;
+case 'x':
+    digit = 10;
+    break;
+case 'l':
+    digit = 50;
+    break;
+case 'c':
+    digit = 100;
+    break;
+case 'd':
+    digit = 500;
+    break;
+case 'm':
+    digit = 1000;
+    break;
+default:
+    digit = -1;
+    break;
 }
 
     if (previousDigit > digit) {
@@ -74,10 +108,55 @@ return digit;
 
 int main()
 {
+    string userInput; // holds whatever the user enters in when prompted
     romanType example;
-  int digit =  example.convertDigit('X', 5000);
-  int full = example.convert2Decimal ();
-    example.printRoman();
+cout << "Salve! (That's Latin for 'hello!')" << endl;
+bool start = true; // this allows the program to start over with a new number when asked
+while (start) {
+cout << "Please input a Roman Numeral. Make sure to only use the letters M, D, C, L, X, V and I (it's not case sensitive)." << endl;
+cin >> userInput;
+
+cout << userInput.find_first_not_of("MDCLXVImdclxvi") << "||||||" << endl;
+
+ while ((userInput.find_first_not_of("MDCLXVImdclxvi") < 40)) //this leads into the error message;
+    {
+        cout << "This is not a valid roman numeral. Please enter a valid roman numeral." << endl;
+        cin >> userInput;
+}
+
+example.getNumeral(userInput);
+example.convert2Decimal();
+bool continueThis = true; // while this is true the menu will retunr after each action
+while (continueThis) {
+
+cout << "Gratias tibi (That means 'thank you' in Latin). What would you like to do now?" << endl;
+cout << "1) Press 'D' to see your number in decimal form" << endl;
+cout << "2) Press 'R' to see your number in Roman Numeral form" << endl;
+cout << "3) Press 'N' to enter a new Roman Numeral" << endl;
+cout << "4) Press 'Q' to quit" << endl;
+cin >> userInput;
+if ((userInput == "D") || (userInput == "d")) {
     example.printDecimal();
+
+}
+
+if ((userInput == "R") || (userInput == "r")) {
+    example.printRoman();
+}
+if ((userInput == "N") || (userInput == "n")) {
+    continueThis = false;
+}
+if ((userInput == "Q") || (userInput == "q")) {
+    cout << "Vale! (That means 'goodbye' in Latin)" << endl;
+    continueThis = false;
+    start = false;
+}
+
+}
+
+} // this is where the main loop that uses the bool 'start' ends
+//cout << userInput.find_first_not_of("MDCLXVImdclxvi") << " ||||| " << endl;
+   // example.printRoman();
+   // example.printDecimal();
     return 0;
 }
