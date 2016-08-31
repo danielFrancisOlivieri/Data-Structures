@@ -1,0 +1,132 @@
+// lineType
+// creates and performs operations on lines
+// such operations include comparing lines, calculating intersection, finding perpendicularity
+
+#include <iostream>
+#include <limits>
+
+using namespace std;
+
+class lineType {
+
+double a, b, c;
+public:
+lineType() {
+
+
+}
+lineType(int first) {
+a = first;
+
+};
+
+lineType (int first, int second) {
+
+a = first;
+b = second;
+};
+
+lineType (int first, int second, int third) {
+a = first;
+b = second;
+c = third;
+}
+
+double getA();
+
+double getB();
+
+double getC();
+
+void setValues (int aValue, int bValue, int cValue);
+
+double findSlope();
+
+bool areEqual(lineType otherLine);
+
+bool areParallel (lineType otherLine);
+
+};
+
+
+int main()
+{
+    lineType mainFrame(40, 80, 160);
+    lineType anotherLine(40, 80, 160);
+   mainFrame.setValues(12, -51, 14);
+    double results = mainFrame.findSlope();
+    cout << results << endl;
+    cout << mainFrame.areParallel(anotherLine) << endl;
+    return 0;
+}
+
+double lineType :: getA() {
+
+return a;
+
+};
+
+double lineType :: getB() {
+
+return b;
+
+};
+
+double lineType :: getC() {
+
+return c;
+
+};
+
+void lineType:: setValues (int aValue, int bValue, int cValue) {
+a = aValue;
+b = bValue;
+c = cValue;
+
+}
+
+double lineType :: findSlope() {
+
+if (b == 0) {
+    return std::numeric_limits<double>::quiet_NaN(); // should return undefined but doesn't
+}
+else {
+
+    double result = -a / b;
+    return result;
+
+}
+
+};
+
+bool lineType :: areEqual(lineType otherLine) {
+
+if ( a == otherLine.getA()) {
+
+    if (b == otherLine.getB()) {
+
+        if (c == otherLine.getC()) {
+            return true;
+        }
+    }
+}
+
+// must add section to address the other way of finding if two lines are equal
+
+};
+
+bool lineType :: areParallel (lineType otherLine) {
+
+if ( this.areEqual(otherLine) ) { // throwing an error I don't understand
+    return false;
+}
+else {
+    // this is not accurate, only for testing
+    return true;
+
+}
+
+}
+
+
+
