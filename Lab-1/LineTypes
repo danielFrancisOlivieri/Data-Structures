@@ -46,17 +46,33 @@ bool areEqual(lineType otherLine);
 
 bool areParallel (lineType otherLine);
 
+bool arePerpendicular (lineType otherLine);
+
 };
 
 
 int main()
 {
-    lineType mainFrame(40, 80, 160);
-    lineType anotherLine(40, 80, 160);
-   mainFrame.setValues(12, -51, 14);
+    double a, b, c;
+    cout << "Hello! In this program we understand lines using the common equation ax + by = c." << endl;
+    cout << "The a value of the line is: ";
+     cin >> a;
+    cout << "The b value of the line is: ";
+     cin >> b;
+    cout << "The c value of the line is: ";
+     cin >> c;
+cout << endl;
+    lineType mainFrame(a, b, c);
+cout << "What would you like to do next?" << endl;
+cout << endl;
+cout << "a) Find the slope of this line?" << endl;
+
+
+   // lineType anotherLine(1, 32, 160);
+    // mainFrame.setValues(12, -51, 14);
     double results = mainFrame.findSlope();
     cout << results << endl;
-    cout << mainFrame.areParallel(anotherLine) << endl;
+    //cout << mainFrame.arePerpendicular(anotherLine) << endl;
     return 0;
 }
 
@@ -98,7 +114,7 @@ else {
 }
 
 };
-
+// in need of attention
 bool lineType :: areEqual(lineType otherLine) {
 
 if ( a == otherLine.getA()) {
@@ -117,14 +133,37 @@ if ( a == otherLine.getA()) {
 
 bool lineType :: areParallel (lineType otherLine) {
 
-if ( this.areEqual(otherLine) ) { // throwing an error I don't understand
+if ( areEqual(otherLine) ) { // makes sure that the lines aren't just the same line
     return false;
 }
-else {
-    // this is not accurate, only for testing
+
+// compares slopes of the different lines
+if ( findSlope() == otherLine.findSlope()) {
     return true;
+}
+
+return false;
 
 }
+
+bool lineType :: arePerpendicular (lineType otherLine) {
+
+if ((b == 0) && (otherLine.b == 0)) {
+    return true;
+}
+
+double firstSlope = findSlope();
+
+double secondSlope = otherLine.findSlope();
+cout << firstSlope << "  " << secondSlope <<endl;
+double sumOfSlopes = firstSlope * secondSlope;
+
+if (sumOfSlopes == -1) {
+
+    return true;
+}
+return false;
+
 
 }
 
