@@ -53,25 +53,40 @@ bool arePerpendicular (lineType otherLine);
 
 int main()
 {
-    double a, b, c;
+    double firstA, firstB, firstC, secondA,secondB, secondC;
     cout << "Hello! In this program we understand lines using the common equation ax + by = c." << endl;
-    cout << "The a value of the line is: ";
-     cin >> a;
-    cout << "The b value of the line is: ";
-     cin >> b;
-    cout << "The c value of the line is: ";
-     cin >> c;
+    cout << "Let's start with the first line" << endl;
+    cout << "The 'a' value of the first line is: ";
+     cin >> firstA;
+    cout << "The 'b' value of the first line is: ";
+     cin >> firstB;
+    cout << "The 'c' value of the first line is: ";
+     cin >> firstC;
 cout << endl;
-    lineType mainFrame(a, b, c);
-cout << "What would you like to do next?" << endl;
+cout << "Now let's input the values for the second line" << endl;
+cout << "The 'a' value of the second line is: " ;
+cin >> secondA;
+cout << "The 'b' value of the second line is: " ;
+cin >> secondB;
+cout << "The 'c' value of the second line is: " ;
+cin >> secondC;
+
+    lineType lineOne(firstA, firstB, firstC);
+    lineType lineTwo (secondA, secondB, secondC);
+char choice;
+cout << "Please press the letter that corresponds to the action you would like to do next." << endl;
 cout << endl;
-cout << "a) Find the slope of this line?" << endl;
-
-
+cout << "a) Find the slope of the first line" << endl;
+cout << "b) Find the slope of the second line" << endl;
+cout << "c) Determine if the two lines are equal" << endl;
+cout << "d) Determine if the two lines are parallel" << endl;
+cout << "e) Determine if the two lines are perpendicular" << endl;
+cout << "f) Determine where the two lines intersect if they are not parallel" << endl; // function not yet written
+cin >> choice;
    // lineType anotherLine(1, 32, 160);
     // mainFrame.setValues(12, -51, 14);
-    double results = mainFrame.findSlope();
-    cout << results << endl;
+    double results = lineTwo.findSlope();
+    cout << results << "  " << choice << endl;
     //cout << mainFrame.arePerpendicular(anotherLine) << endl;
     return 0;
 }
