@@ -9,100 +9,20 @@ class romanType {
 string romanNumeral = "CCCLIX"; // holds roman numeral
 int decimal = 5; // holds digits
 // prints decimal
-public: printDecimal() {
-cout << "Here is your number in decimal form: " << decimal << endl;
-cout << endl;
-};
-// prints roman
-public: printRoman() {
-cout << "Here is your number in Roman numeral form: " << romanNumeral << endl;
-cout << endl;
-};
-public: void getNumeral(string inputtedNumeral) {
-romanNumeral = inputtedNumeral;
+public:
 
-}
+   void printDecimal();
+// prints roman
+ void printRoman();
+void getNumeral(string inputtedNumeral);
 
 
 // precon: has romanNumeral value
 // romanNumeral value must consist of: M, D, C, L, X, V, I
 // postcon: decimal = value of roman numeral
-convert2Decimal() {
-int i = romanNumeral.length() - 1;
-int previous = 0;
-char numeral;
-int digit; // holds current digit
-int decimalValue = 0; // holds current value of whole number
-while ( i >= 0 ) {
-numeral = romanNumeral.at(i);
-digit = convertDigit(numeral, previous);
-    if (digit > 0) {
-        previous = digit;
-    }
-    decimalValue = decimalValue + digit;
-    i--;
-}
-decimal = decimalValue;
-return decimalValue;
-};
+int convert2Decimal();
 
-public: convertDigit (char numeral, int previousDigit) {
-    int digit = 0;
-switch (numeral) { // switch assigns digit the value associated with the roman numeral
-
-case 'I':
-    digit = 1;
-break;
-case 'V':
-    digit = 5;
-    break;
-case 'X':
-    digit = 10;
-    break;
-case 'L':
-    digit = 50;
-    break;
-case 'C':
-    digit = 100;
-    break;
-case 'D':
-    digit = 500;
-    break;
-case 'M':
-    digit = 1000;
-    break;
-
-    case 'i':
-    digit = 1;
-break;
-case 'v':
-    digit = 5;
-    break;
-case 'x':
-    digit = 10;
-    break;
-case 'l':
-    digit = 50;
-    break;
-case 'c':
-    digit = 100;
-    break;
-case 'd':
-    digit = 500;
-    break;
-case 'm':
-    digit = 1000;
-    break;
-default:
-    digit = -1;
-    break;
-}
-
-    if (previousDigit > digit) {
-        digit = digit - (digit * 2);
-    }
-return digit;
-};
+int convertDigit (char numeral, int previousDigit);
 
 };
 
@@ -159,3 +79,96 @@ if ((userInput == "Q") || (userInput == "q")) {
    // example.printDecimal();
     return 0;
 }
+
+ void romanType :: printDecimal() {
+cout << "Here is your number in decimal form: " << decimal << endl;
+cout << endl;
+};
+
+ void romanType :: printRoman() {
+cout << "Here is your number in Roman numeral form: " << romanNumeral << endl;
+cout << endl;
+};
+
+void romanType :: getNumeral(string inputtedNumeral) {
+romanNumeral = inputtedNumeral;
+
+}
+
+int romanType :: convert2Decimal() {
+int i = romanNumeral.length() - 1;
+int previous = 0;
+char numeral;
+int digit; // holds current digit
+int decimalValue = 0; // holds current value of whole number
+while ( i >= 0 ) {
+numeral = romanNumeral.at(i);
+digit = convertDigit(numeral, previous);
+    if (digit > 0) {
+        previous = digit;
+    }
+    decimalValue = decimalValue + digit;
+    i--;
+}
+decimal = decimalValue;
+return decimalValue;
+};
+
+
+int romanType :: convertDigit (char numeral, int previousDigit) {
+    int digit = 0;
+switch (numeral) { // switch assigns digit the value associated with the roman numeral
+
+case 'I':
+    digit = 1;
+break;
+case 'V':
+    digit = 5;
+    break;
+case 'X':
+    digit = 10;
+    break;
+case 'L':
+    digit = 50;
+    break;
+case 'C':
+    digit = 100;
+    break;
+case 'D':
+    digit = 500;
+    break;
+case 'M':
+    digit = 1000;
+    break;
+
+    case 'i':
+    digit = 1;
+break;
+case 'v':
+    digit = 5;
+    break;
+case 'x':
+    digit = 10;
+    break;
+case 'l':
+    digit = 50;
+    break;
+case 'c':
+    digit = 100;
+    break;
+case 'd':
+    digit = 500;
+    break;
+case 'm':
+    digit = 1000;
+    break;
+default:
+    digit = -1;
+    break;
+}
+
+    if (previousDigit > digit) {
+        digit = digit - (digit * 2);
+    }
+return digit;
+};
