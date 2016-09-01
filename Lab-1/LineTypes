@@ -206,6 +206,8 @@ double lineType::findSlope() {
 // in need of attention
 bool lineType::areEqual(lineType otherLine) {
 
+double aResult, bResult, cResult;
+
   if (a == otherLine.getA()) {
 
     if (b == otherLine.getB()) {
@@ -217,7 +219,15 @@ bool lineType::areEqual(lineType otherLine) {
   }
 
   // must add section to address the other way of finding if two lines are equal
+  aResult = a / otherLine.a;
+  bResult = b / otherLine.b;
+  cResult = c / otherLine.c;
 
+  if ((aResult == bResult) && (bResult == cResult)) {
+    return true;
+  }
+
+  return false;
 };
 
 bool lineType::areParallel(lineType otherLine) {
