@@ -48,14 +48,21 @@ bool areParallel (lineType otherLine);
 
 bool arePerpendicular (lineType otherLine);
 
+double pointOfIntersectionX (lineType otherLine);
+
+double pointOfIntersectionY (lineType otherLine);
+
 };
 
 
 int main()
 {
+    bool restart = true;
     double firstA, firstB, firstC, secondA,secondB, secondC;
     cout << "Hello! In this program we understand lines using the common equation ax + by = c." << endl;
     cout << "Let's start with the first line" << endl;
+
+   while  (restart) {
     cout << "The 'a' value of the first line is: ";
      cin >> firstA;
     cout << "The 'b' value of the first line is: ";
@@ -74,6 +81,11 @@ cin >> secondC;
     lineType lineOne(firstA, firstB, firstC);
     lineType lineTwo (secondA, secondB, secondC);
 char choice;
+bool continueThis = true;
+while (continueThis) {
+  double results = lineOne.pointOfIntersectionX(lineTwo);
+  double results2 = lineOne.pointOfIntersectionY(lineTwo);
+
 cout << "Please press the letter that corresponds to the action you would like to do next." << endl;
 cout << endl;
 cout << "a) Find the slope of the first line" << endl;
@@ -82,14 +94,92 @@ cout << "c) Determine if the two lines are equal" << endl;
 cout << "d) Determine if the two lines are parallel" << endl;
 cout << "e) Determine if the two lines are perpendicular" << endl;
 cout << "f) Determine where the two lines intersect if they are not parallel" << endl; // function not yet written
+cout << "g) Restart with new lines" << endl;
+cout << "h) Exit this program" << endl;
 cin >> choice;
-   // lineType anotherLine(1, 32, 160);
-    // mainFrame.setValues(12, -51, 14);
-    double results = lineTwo.findSlope();
-    cout << results << "  " << choice << endl;
-    //cout << mainFrame.arePerpendicular(anotherLine) << endl;
-    return 0;
+
+
+switch (choice) {
+
+case 'a' :
+    {
+
+
+      double slope = lineOne.findSlope();
+         cout << "The slope of the first line is: " << slope << endl;
+    }
+    break;
+case 'b' :
+    {
+
+
+       double slope = lineTwo.findSlope();
+         cout << "The slope of the second line is: " << slope << endl;
+    break;
+    }
+case 'c' :
+    {
+
+
+if    (lineOne.areEqual(lineTwo) == 0 ) {
+    cout << "These lines are not equivalent." << endl;
+
 }
+
+else {
+     cout << "These lines are equivalent." << endl;
+
+}
+    }
+break;
+
+
+case 'd':
+    if (lineOne.areParallel(lineTwo)) {
+        cout << "These lines are parallel." << endl;
+
+    }
+    else {
+        cout << "These lines are not parallel." << endl;
+
+    }
+    break;
+case 'e':
+    {
+
+    if (lineOne.arePerpendicular(lineTwo)) {
+        cout << "These lines are perpendicular" << endl;
+    }
+    }
+    break;
+case 'f':
+    {
+
+    double xVal = lineOne.pointOfIntersectionX(lineTwo);
+
+    double yVal = lineOne.pointOfIntersectionY(lineTwo);
+
+    cout << "These lines intersect when the x value is " << xVal << " and the y value is " << yVal << endl;
+    }
+break;
+
+case 'g' :
+    continueThis = false;
+    break;
+case 'h':
+    continueThis = false;
+    restart = false;
+}
+
+
+
+ }
+
+}
+  return 0;
+   }
+
+
 
 double lineType :: getA() {
 
@@ -163,6 +253,10 @@ return false;
 
 bool lineType :: arePerpendicular (lineType otherLine) {
 
+if ((a == 0) && (otherLine.a == 0)) {
+    return true;
+}
+
 if ((b == 0) && (otherLine.b == 0)) {
     return true;
 }
@@ -170,7 +264,6 @@ if ((b == 0) && (otherLine.b == 0)) {
 double firstSlope = findSlope();
 
 double secondSlope = otherLine.findSlope();
-cout << firstSlope << "  " << secondSlope <<endl;
 double sumOfSlopes = firstSlope * secondSlope;
 
 if (sumOfSlopes == -1) {
@@ -182,5 +275,40 @@ return false;
 
 }
 
+double lineType :: pointOfIntersectionX (lineType otherLine) {
+double allA, allB, result;
+
+
+if ((a == 0) && (otherLine.a == 0)) {
+    return 0;
+}
+
+if ((b == 0) && (otherLine.b == 0)) {
+    return 0;
+}
+
+allA = a - otherLine.a; // holds results of subtraction for later use in division
+
+allB = otherLine.b - b;
+
+result = allB / allA;
+
+//return "These two lines intersect when X equals " << result ;
+return result;
+
+}
+
+
+double lineType :: pointOfIntersectionY (lineType otherLine) {
+
+double yValue, xValue;
+
+xValue = pointOfIntersectionX(otherLine);
+
+yValue = (a * xValue) + b;
+
+return yValue;
+
+}
 
 
