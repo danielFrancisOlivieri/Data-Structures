@@ -4,16 +4,21 @@
 #include <iostream>
 
 using namespace std;
-
+//  main class 
+// holds both roman and decimal values
 class romanType {
   string romanNumeral = "CCCLIX"; // holds roman numeral
   int decimal = 5; // holds digits
-  // prints decimal
-  public:
 
+  public:
+// prints decimal 
     void printDecimal();
   // prints roman
+  //precon: roman numeral value initialized
+  // postcon: roman numeral printed to console
   void printRoman();
+  //precon: user has inputted numeral
+  // postcon: object's romanNumeral value reset
   void getNumeral(string inputtedNumeral);
 
   // precon: has romanNumeral value
@@ -21,13 +26,15 @@ class romanType {
   // postcon: decimal = value of roman numeral
   int convert2Decimal();
 
-  int convertDigit(char numeral, int previousDigit);
+  // precon: romanNumeral value initiated
+  // postcon: converts on digit from roman to decimal 
+  int convertDigit(char numeral, int previousDigit); // previousDigit is to determine if the value should be negative 
 
 };
 
 int main() {
   string userInput; // holds whatever the user enters in when prompted
-  romanType example;
+  romanType example; // mainframe 
   cout << "Salve! (That's Latin for 'hello!')" << endl;
   bool start = true; // this allows the program to start over with a new number when asked
   while (start) {
@@ -51,9 +58,10 @@ int main() {
       cout << "3) Press 'N' to enter a new Roman Numeral" << endl;
       cout << "4) Press 'Q' to quit" << endl;
       cin >> userInput;
+      
+      //these if statements direct the user input to the correct functionality 
       if ((userInput == "D") || (userInput == "d")) {
         example.printDecimal();
-
       }
 
       if ((userInput == "R") || (userInput == "r")) {
@@ -76,22 +84,22 @@ int main() {
   // example.printDecimal();
   return 0;
 }
-
+// prints decimal value
 void romanType::printDecimal() {
   cout << "Here is your number in decimal form: " << decimal << endl;
   cout << endl;
 };
-
+// print roman
 void romanType::printRoman() {
   cout << "Here is your number in Roman numeral form: " << romanNumeral << endl;
   cout << endl;
 };
-
+// inputs the numeral value
 void romanType::getNumeral(string inputtedNumeral) {
   romanNumeral = inputtedNumeral;
 
 }
-
+// converts roman to decimal 
 int romanType::convert2Decimal() {
   int i = romanNumeral.length() - 1;
   int previous = 0;
@@ -111,6 +119,7 @@ int romanType::convert2Decimal() {
   return decimalValue;
 };
 
+// converts to digit 
 int romanType::convertDigit(char numeral, int previousDigit) {
   int digit = 0;
   switch (numeral) { // switch assigns digit the value associated with the roman numeral
