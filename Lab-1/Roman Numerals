@@ -6,169 +6,165 @@
 using namespace std;
 
 class romanType {
-string romanNumeral = "CCCLIX"; // holds roman numeral
-int decimal = 5; // holds digits
-// prints decimal
-public:
+  string romanNumeral = "CCCLIX"; // holds roman numeral
+  int decimal = 5; // holds digits
+  // prints decimal
+  public:
 
-   void printDecimal();
-// prints roman
- void printRoman();
-void getNumeral(string inputtedNumeral);
+    void printDecimal();
+  // prints roman
+  void printRoman();
+  void getNumeral(string inputtedNumeral);
 
+  // precon: has romanNumeral value
+  // romanNumeral value must consist of: M, D, C, L, X, V, I
+  // postcon: decimal = value of roman numeral
+  int convert2Decimal();
 
-// precon: has romanNumeral value
-// romanNumeral value must consist of: M, D, C, L, X, V, I
-// postcon: decimal = value of roman numeral
-int convert2Decimal();
-
-int convertDigit (char numeral, int previousDigit);
+  int convertDigit(char numeral, int previousDigit);
 
 };
 
-int main()
-{
-    string userInput; // holds whatever the user enters in when prompted
-    romanType example;
-cout << "Salve! (That's Latin for 'hello!')" << endl;
-bool start = true; // this allows the program to start over with a new number when asked
-while (start) {
-cout << "Please input a Roman Numeral. Make sure to only use the letters M, D, C, L, X, V and I (it's not case sensitive)." << endl;
-cin >> userInput;
+int main() {
+  string userInput; // holds whatever the user enters in when prompted
+  romanType example;
+  cout << "Salve! (That's Latin for 'hello!')" << endl;
+  bool start = true; // this allows the program to start over with a new number when asked
+  while (start) {
+    cout << "Please input a Roman Numeral. Make sure to only use the letters M, D, C, L, X, V and I (it's not case sensitive)." << endl;
+    cin >> userInput;
 
-
- while ((userInput.find_first_not_of("MDCLXVImdclxvi") < 40)) //this leads into the error message;
+    while ((userInput.find_first_not_of("MDCLXVImdclxvi") < 40)) //this leads into the error message;
     {
-        cout << "This is not a valid roman numeral. Please enter a valid roman numeral." << endl;
-        cin >> userInput;
+      cout << "This is not a valid roman numeral. Please enter a valid roman numeral." << endl;
+      cin >> userInput;
+    }
+
+    example.getNumeral(userInput);
+    example.convert2Decimal();
+    bool continueThis = true; // while this is true the menu will retunr after each action
+    while (continueThis) {
+
+      cout << "Gratias tibi (That means 'thank you' in Latin). What would you like to do now?" << endl;
+      cout << "1) Press 'D' to see your number in decimal form" << endl;
+      cout << "2) Press 'R' to see your number in Roman Numeral form" << endl;
+      cout << "3) Press 'N' to enter a new Roman Numeral" << endl;
+      cout << "4) Press 'Q' to quit" << endl;
+      cin >> userInput;
+      if ((userInput == "D") || (userInput == "d")) {
+        example.printDecimal();
+
+      }
+
+      if ((userInput == "R") || (userInput == "r")) {
+        example.printRoman();
+      }
+      if ((userInput == "N") || (userInput == "n")) {
+        continueThis = false;
+      }
+      if ((userInput == "Q") || (userInput == "q")) {
+        cout << "Vale! (That means 'goodbye' in Latin)" << endl;
+        continueThis = false;
+        start = false;
+      }
+
+    }
+
+  } // this is where the main loop that uses the bool 'start' ends
+  //cout << userInput.find_first_not_of("MDCLXVImdclxvi") << " ||||| " << endl;
+  // example.printRoman();
+  // example.printDecimal();
+  return 0;
 }
 
-example.getNumeral(userInput);
-example.convert2Decimal();
-bool continueThis = true; // while this is true the menu will retunr after each action
-while (continueThis) {
-
-cout << "Gratias tibi (That means 'thank you' in Latin). What would you like to do now?" << endl;
-cout << "1) Press 'D' to see your number in decimal form" << endl;
-cout << "2) Press 'R' to see your number in Roman Numeral form" << endl;
-cout << "3) Press 'N' to enter a new Roman Numeral" << endl;
-cout << "4) Press 'Q' to quit" << endl;
-cin >> userInput;
-if ((userInput == "D") || (userInput == "d")) {
-    example.printDecimal();
-
-}
-
-if ((userInput == "R") || (userInput == "r")) {
-    example.printRoman();
-}
-if ((userInput == "N") || (userInput == "n")) {
-    continueThis = false;
-}
-if ((userInput == "Q") || (userInput == "q")) {
-    cout << "Vale! (That means 'goodbye' in Latin)" << endl;
-    continueThis = false;
-    start = false;
-}
-
-}
-
-} // this is where the main loop that uses the bool 'start' ends
-//cout << userInput.find_first_not_of("MDCLXVImdclxvi") << " ||||| " << endl;
-   // example.printRoman();
-   // example.printDecimal();
-    return 0;
-}
-
- void romanType :: printDecimal() {
-cout << "Here is your number in decimal form: " << decimal << endl;
-cout << endl;
+void romanType::printDecimal() {
+  cout << "Here is your number in decimal form: " << decimal << endl;
+  cout << endl;
 };
 
- void romanType :: printRoman() {
-cout << "Here is your number in Roman numeral form: " << romanNumeral << endl;
-cout << endl;
+void romanType::printRoman() {
+  cout << "Here is your number in Roman numeral form: " << romanNumeral << endl;
+  cout << endl;
 };
 
-void romanType :: getNumeral(string inputtedNumeral) {
-romanNumeral = inputtedNumeral;
+void romanType::getNumeral(string inputtedNumeral) {
+  romanNumeral = inputtedNumeral;
 
 }
 
-int romanType :: convert2Decimal() {
-int i = romanNumeral.length() - 1;
-int previous = 0;
-char numeral;
-int digit; // holds current digit
-int decimalValue = 0; // holds current value of whole number
-while ( i >= 0 ) {
-numeral = romanNumeral.at(i);
-digit = convertDigit(numeral, previous);
+int romanType::convert2Decimal() {
+  int i = romanNumeral.length() - 1;
+  int previous = 0;
+  char numeral;
+  int digit; // holds current digit
+  int decimalValue = 0; // holds current value of whole number
+  while (i >= 0) {
+    numeral = romanNumeral.at(i);
+    digit = convertDigit(numeral, previous);
     if (digit > 0) {
-        previous = digit;
+      previous = digit;
     }
     decimalValue = decimalValue + digit;
     i--;
-}
-decimal = decimalValue;
-return decimalValue;
+  }
+  decimal = decimalValue;
+  return decimalValue;
 };
 
+int romanType::convertDigit(char numeral, int previousDigit) {
+  int digit = 0;
+  switch (numeral) { // switch assigns digit the value associated with the roman numeral
 
-int romanType :: convertDigit (char numeral, int previousDigit) {
-    int digit = 0;
-switch (numeral) { // switch assigns digit the value associated with the roman numeral
-
-case 'I':
+  case 'I':
     digit = 1;
-break;
-case 'V':
+    break;
+  case 'V':
     digit = 5;
     break;
-case 'X':
+  case 'X':
     digit = 10;
     break;
-case 'L':
+  case 'L':
     digit = 50;
     break;
-case 'C':
+  case 'C':
     digit = 100;
     break;
-case 'D':
+  case 'D':
     digit = 500;
     break;
-case 'M':
+  case 'M':
     digit = 1000;
     break;
 
-    case 'i':
+  case 'i':
     digit = 1;
-break;
-case 'v':
+    break;
+  case 'v':
     digit = 5;
     break;
-case 'x':
+  case 'x':
     digit = 10;
     break;
-case 'l':
+  case 'l':
     digit = 50;
     break;
-case 'c':
+  case 'c':
     digit = 100;
     break;
-case 'd':
+  case 'd':
     digit = 500;
     break;
-case 'm':
+  case 'm':
     digit = 1000;
     break;
-default:
+  default:
     digit = -1;
     break;
-}
+  }
 
-    if (previousDigit > digit) {
-        digit = digit - (digit * 2);
-    }
-return digit;
+  if (previousDigit > digit) {
+    digit = digit - (digit * 2);
+  }
+  return digit;
 };
