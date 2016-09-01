@@ -9,306 +9,285 @@ using namespace std;
 
 class lineType {
 
-double a, b, c;
-public:
-lineType() {
+  double a, b, c;
+  public:
+    lineType() {
 
+    }
+  lineType(int first) {
+    a = first;
 
-}
-lineType(int first) {
-a = first;
+  };
+
+  lineType(int first, int second) {
+
+    a = first;
+    b = second;
+  };
+
+  lineType(int first, int second, int third) {
+    a = first;
+    b = second;
+    c = third;
+  }
+
+  double getA();
+
+  double getB();
+
+  double getC();
+
+  void setValues(int aValue, int bValue, int cValue);
+
+  double findSlope();
+
+  bool areEqual(lineType otherLine);
+
+  bool areParallel(lineType otherLine);
+
+  bool arePerpendicular(lineType otherLine);
+
+  double pointOfIntersectionX(lineType otherLine);
+
+  double pointOfIntersectionY(lineType otherLine);
 
 };
 
-lineType (int first, int second) {
+int main() {
+  bool restart = true;
+  double firstA, firstB, firstC, secondA, secondB, secondC;
+  cout << "Hello! In this program we understand lines using the common equation ax + by = c." << endl;
+  cout << "Let's start with the first line" << endl;
 
-a = first;
-b = second;
-};
-
-lineType (int first, int second, int third) {
-a = first;
-b = second;
-c = third;
-}
-
-double getA();
-
-double getB();
-
-double getC();
-
-void setValues (int aValue, int bValue, int cValue);
-
-double findSlope();
-
-bool areEqual(lineType otherLine);
-
-bool areParallel (lineType otherLine);
-
-bool arePerpendicular (lineType otherLine);
-
-double pointOfIntersectionX (lineType otherLine);
-
-double pointOfIntersectionY (lineType otherLine);
-
-};
-
-
-int main()
-{
-    bool restart = true;
-    double firstA, firstB, firstC, secondA,secondB, secondC;
-    cout << "Hello! In this program we understand lines using the common equation ax + by = c." << endl;
-    cout << "Let's start with the first line" << endl;
-
-   while  (restart) {
+  while (restart) {
     cout << "The 'a' value of the first line is: ";
-     cin >> firstA;
+    cin >> firstA;
     cout << "The 'b' value of the first line is: ";
-     cin >> firstB;
+    cin >> firstB;
     cout << "The 'c' value of the first line is: ";
-     cin >> firstC;
-cout << endl;
-cout << "Now let's input the values for the second line" << endl;
-cout << "The 'a' value of the second line is: " ;
-cin >> secondA;
-cout << "The 'b' value of the second line is: " ;
-cin >> secondB;
-cout << "The 'c' value of the second line is: " ;
-cin >> secondC;
+    cin >> firstC;
+    cout << endl;
+    cout << "Now let's input the values for the second line" << endl;
+    cout << "The 'a' value of the second line is: ";
+    cin >> secondA;
+    cout << "The 'b' value of the second line is: ";
+    cin >> secondB;
+    cout << "The 'c' value of the second line is: ";
+    cin >> secondC;
 
     lineType lineOne(firstA, firstB, firstC);
-    lineType lineTwo (secondA, secondB, secondC);
-char choice;
-bool continueThis = true;
-while (continueThis) {
-  double results = lineOne.pointOfIntersectionX(lineTwo);
-  double results2 = lineOne.pointOfIntersectionY(lineTwo);
+    lineType lineTwo(secondA, secondB, secondC);
+    char choice;
+    bool continueThis = true;
+    while (continueThis) {
+      double results = lineOne.pointOfIntersectionX(lineTwo);
+      double results2 = lineOne.pointOfIntersectionY(lineTwo);
 
-cout << "Please press the letter that corresponds to the action you would like to do next." << endl;
-cout << endl;
-cout << "a) Find the slope of the first line" << endl;
-cout << "b) Find the slope of the second line" << endl;
-cout << "c) Determine if the two lines are equal" << endl;
-cout << "d) Determine if the two lines are parallel" << endl;
-cout << "e) Determine if the two lines are perpendicular" << endl;
-cout << "f) Determine where the two lines intersect if they are not parallel" << endl; // function not yet written
-cout << "g) Restart with new lines" << endl;
-cout << "h) Exit this program" << endl;
-cin >> choice;
+      cout << "Please press the letter that corresponds to the action you would like to do next." << endl;
+      cout << endl;
+      cout << "a) Find the slope of the first line" << endl;
+      cout << "b) Find the slope of the second line" << endl;
+      cout << "c) Determine if the two lines are equal" << endl;
+      cout << "d) Determine if the two lines are parallel" << endl;
+      cout << "e) Determine if the two lines are perpendicular" << endl;
+      cout << "f) Determine where the two lines intersect if they are not parallel" << endl; // function not yet written
+      cout << "g) Restart with new lines" << endl;
+      cout << "h) Exit this program" << endl;
+      cin >> choice;
 
+      switch (choice) {
 
-switch (choice) {
+      case 'a':
+        {
 
-case 'a' :
-    {
+          double slope = lineOne.findSlope();
+          cout << "The slope of the first line is: " << slope << endl;
+        }
+        break;
+      case 'b':
+        {
 
+          double slope = lineTwo.findSlope();
+          cout << "The slope of the second line is: " << slope << endl;
+          break;
+        }
+      case 'c':
+        {
 
-      double slope = lineOne.findSlope();
-         cout << "The slope of the first line is: " << slope << endl;
+          if (lineOne.areEqual(lineTwo) == 0) {
+            cout << "These lines are not equivalent." << endl;
+
+          } else {
+            cout << "These lines are equivalent." << endl;
+
+          }
+        }
+        break;
+
+      case 'd':
+        if (lineOne.areParallel(lineTwo)) {
+          cout << "These lines are parallel." << endl;
+
+        } else {
+          cout << "These lines are not parallel." << endl;
+
+        }
+        break;
+      case 'e':
+        {
+
+          if (lineOne.arePerpendicular(lineTwo)) {
+            cout << "These lines are perpendicular" << endl;
+          }
+        }
+        break;
+      case 'f':
+        {
+
+          double xVal = lineOne.pointOfIntersectionX(lineTwo);
+
+          double yVal = lineOne.pointOfIntersectionY(lineTwo);
+
+          cout << "These lines intersect when the x value is " << xVal << " and the y value is " << yVal << endl;
+        }
+        break;
+
+      case 'g':
+        continueThis = false;
+        break;
+      case 'h':
+        continueThis = false;
+        restart = false;
+      }
+
     }
-    break;
-case 'b' :
-    {
 
-
-       double slope = lineTwo.findSlope();
-         cout << "The slope of the second line is: " << slope << endl;
-    break;
-    }
-case 'c' :
-    {
-
-
-if    (lineOne.areEqual(lineTwo) == 0 ) {
-    cout << "These lines are not equivalent." << endl;
-
-}
-
-else {
-     cout << "These lines are equivalent." << endl;
-
-}
-    }
-break;
-
-
-case 'd':
-    if (lineOne.areParallel(lineTwo)) {
-        cout << "These lines are parallel." << endl;
-
-    }
-    else {
-        cout << "These lines are not parallel." << endl;
-
-    }
-    break;
-case 'e':
-    {
-
-    if (lineOne.arePerpendicular(lineTwo)) {
-        cout << "These lines are perpendicular" << endl;
-    }
-    }
-    break;
-case 'f':
-    {
-
-    double xVal = lineOne.pointOfIntersectionX(lineTwo);
-
-    double yVal = lineOne.pointOfIntersectionY(lineTwo);
-
-    cout << "These lines intersect when the x value is " << xVal << " and the y value is " << yVal << endl;
-    }
-break;
-
-case 'g' :
-    continueThis = false;
-    break;
-case 'h':
-    continueThis = false;
-    restart = false;
-}
-
-
-
- }
-
-}
+  }
   return 0;
-   }
+}
 
+double lineType::getA() {
 
-
-double lineType :: getA() {
-
-return a;
+  return a;
 
 };
 
-double lineType :: getB() {
+double lineType::getB() {
 
-return b;
-
-};
-
-double lineType :: getC() {
-
-return c;
+  return b;
 
 };
 
-void lineType:: setValues (int aValue, int bValue, int cValue) {
-a = aValue;
-b = bValue;
-c = cValue;
+double lineType::getC() {
+
+  return c;
+
+};
+
+void lineType::setValues(int aValue, int bValue, int cValue) {
+  a = aValue;
+  b = bValue;
+  c = cValue;
 
 }
 
-double lineType :: findSlope() {
+double lineType::findSlope() {
 
-if (b == 0) {
-    return std::numeric_limits<double>::quiet_NaN(); // should return undefined but doesn't
-}
-else {
+  if (b == 0) {
+    return std::numeric_limits < double > ::quiet_NaN(); // should return undefined but doesn't
+  } else {
 
     double result = -a / b;
     return result;
 
-}
+  }
 
 };
 // in need of attention
-bool lineType :: areEqual(lineType otherLine) {
+bool lineType::areEqual(lineType otherLine) {
 
-if ( a == otherLine.getA()) {
+  if (a == otherLine.getA()) {
 
     if (b == otherLine.getB()) {
 
-        if (c == otherLine.getC()) {
-            return true;
-        }
+      if (c == otherLine.getC()) {
+        return true;
+      }
     }
-}
+  }
 
-// must add section to address the other way of finding if two lines are equal
+  // must add section to address the other way of finding if two lines are equal
 
 };
 
-bool lineType :: areParallel (lineType otherLine) {
+bool lineType::areParallel(lineType otherLine) {
 
-if ( areEqual(otherLine) ) { // makes sure that the lines aren't just the same line
+  if (areEqual(otherLine)) { // makes sure that the lines aren't just the same line
     return false;
-}
+  }
 
-// compares slopes of the different lines
-if ( findSlope() == otherLine.findSlope()) {
+  // compares slopes of the different lines
+  if (findSlope() == otherLine.findSlope()) {
     return true;
+  }
+
+  return false;
+
 }
 
-return false;
+bool lineType::arePerpendicular(lineType otherLine) {
 
-}
-
-bool lineType :: arePerpendicular (lineType otherLine) {
-
-if ((a == 0) && (otherLine.a == 0)) {
+  if ((a == 0) && (otherLine.a == 0)) {
     return true;
-}
+  }
 
-if ((b == 0) && (otherLine.b == 0)) {
+  if ((b == 0) && (otherLine.b == 0)) {
     return true;
-}
+  }
 
-double firstSlope = findSlope();
+  double firstSlope = findSlope();
 
-double secondSlope = otherLine.findSlope();
-double sumOfSlopes = firstSlope * secondSlope;
+  double secondSlope = otherLine.findSlope();
+  double sumOfSlopes = firstSlope * secondSlope;
 
-if (sumOfSlopes == -1) {
+  if (sumOfSlopes == -1) {
 
     return true;
+  }
+  return false;
+
 }
-return false;
 
+double lineType::pointOfIntersectionX(lineType otherLine) {
+  double allA, allB, result;
 
-}
-
-double lineType :: pointOfIntersectionX (lineType otherLine) {
-double allA, allB, result;
-
-
-if ((a == 0) && (otherLine.a == 0)) {
+  if ((a == 0) && (otherLine.a == 0)) {
     return 0;
-}
+  }
 
-if ((b == 0) && (otherLine.b == 0)) {
+  if ((b == 0) && (otherLine.b == 0)) {
     return 0;
-}
+  }
 
-allA = a - otherLine.a; // holds results of subtraction for later use in division
+  allA = a - otherLine.a; // holds results of subtraction for later use in division
 
-allB = otherLine.b - b;
+  allB = otherLine.b - b;
 
-result = allB / allA;
+  result = allB / allA;
 
-//return "These two lines intersect when X equals " << result ;
-return result;
-
-}
-
-
-double lineType :: pointOfIntersectionY (lineType otherLine) {
-
-double yValue, xValue;
-
-xValue = pointOfIntersectionX(otherLine);
-
-yValue = (a * xValue) + b;
-
-return yValue;
+  //return "These two lines intersect when X equals " << result ;
+  return result;
 
 }
 
+double lineType::pointOfIntersectionY(lineType otherLine) {
 
+  double yValue, xValue;
+
+  xValue = pointOfIntersectionX(otherLine);
+
+  yValue = (a * xValue) + b;
+
+  return yValue;
+
+}
