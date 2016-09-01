@@ -90,65 +90,98 @@ int main() {
       cout << "c) Determine if the two lines are equal" << endl;
       cout << "d) Determine if the two lines are parallel" << endl;
       cout << "e) Determine if the two lines are perpendicular" << endl;
-      cout << "f) Determine where the two lines intersect if they are not parallel" << endl; // function not yet written
+      cout << "f) Determine where the two lines intersect" << endl; // function not yet written
       cout << "g) Restart with new lines" << endl;
       cout << "h) Exit this program" << endl;
       cin >> choice;
-
+      cout << endl;
       switch (choice) {
 
       case 'a':
         {
 
           double slope = lineOne.findSlope();
+          cout << "**********************************************************" << endl;
+          cout << "Answer: " << endl;
           cout << "The slope of the first line is: " << slope << endl;
+          cout << "**********************************************************" << endl;
         }
         break;
       case 'b':
         {
 
           double slope = lineTwo.findSlope();
+           cout << "**********************************************************" << endl;
+          cout << "Answer: " << endl;
           cout << "The slope of the second line is: " << slope << endl;
+      cout << "**********************************************************" << endl;
           break;
         }
       case 'c':
         {
 
           if (lineOne.areEqual(lineTwo) == 0) {
+                 cout << "**********************************************************" << endl;
+          cout << "Answer: " << endl;
             cout << "These lines are not equivalent." << endl;
+         cout << "**********************************************************" << endl;
 
           } else {
+         cout << "**********************************************************" << endl;
+          cout << "Answer: " << endl;
             cout << "These lines are equivalent." << endl;
-
+         cout << "**********************************************************" << endl;
           }
         }
         break;
 
       case 'd':
         if (lineOne.areParallel(lineTwo)) {
+                   cout << "**********************************************************" << endl;
+          cout << "Answer: " << endl;
           cout << "These lines are parallel." << endl;
-
+ cout << "**********************************************************" << endl;
         } else {
+               cout << "**********************************************************" << endl;
+          cout << "Answer: " << endl;
           cout << "These lines are not parallel." << endl;
-
+ cout << "**********************************************************" << endl;
         }
         break;
       case 'e':
         {
 
           if (lineOne.arePerpendicular(lineTwo)) {
+                   cout << "**********************************************************" << endl;
+          cout << "Answer: " << endl;
             cout << "These lines are perpendicular" << endl;
+             cout << "**********************************************************" << endl;
+          }
+          else {
+                 cout << "**********************************************************" << endl;
+          cout << "Answer: " << endl;
+             cout << "These lines are not perpendicular" << endl;
+              cout << "**********************************************************" << endl;
           }
         }
         break;
       case 'f':
         {
-
+            if (lineOne.areParallel(lineTwo)) {
+                   cout << "**********************************************************" << endl;
+          cout << "Answer: " << endl;
+          cout << "These lines are parallel and therefore do not intersect." << endl;
+           cout << "**********************************************************" << endl;
+            }
+            else {
           double xVal = lineOne.pointOfIntersectionX(lineTwo);
 
           double yVal = lineOne.pointOfIntersectionY(lineTwo);
-
+   cout << "**********************************************************" << endl;
+          cout << "Answer: " << endl;
           cout << "These lines intersect when the x value is " << xVal << " and the y value is " << yVal << endl;
+           cout << "**********************************************************" << endl;
+            }
         }
         break;
 
@@ -195,7 +228,11 @@ double lineType::findSlope() {
 
   if (b == 0) {
     return std::numeric_limits < double > ::quiet_NaN(); // should return undefined but doesn't
-  } else {
+  }
+  else if (a == 0) {
+     return std::numeric_limits < double > ::quiet_NaN(); // should return undefined but doesn't
+  }
+  else {
 
     double result = -a / b;
     return result;
@@ -218,7 +255,7 @@ double aResult, bResult, cResult;
     }
   }
 
-  // must add section to address the other way of finding if two lines are equal
+  // uses other method to determine equality
   aResult = a / otherLine.a;
   bResult = b / otherLine.b;
   cResult = c / otherLine.c;
