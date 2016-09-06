@@ -1,0 +1,62 @@
+#include <iostream>
+
+using namespace std;
+
+ class Animal {
+
+public:
+    //string animalType;  // placeholder, should never be shown to user while uninitialized
+
+//prints out simple silly message that is adaptable for each class
+/*void talk() {
+cout << "I am a " + animalType + " and one of my hobbies is not being eaten" << endl;
+}
+*/
+Animal () {} ; // how do I get a good error message?
+
+};
+
+class Herbivore {
+
+public:
+void xivore () {
+cout << "I am a herbivore. That means that I don't like to eat things that move." << endl;
+}
+
+
+};
+
+class Carnivore {
+void xivore () {
+cout << "I am a carnivore. That means that I like to eat things that move." << endl;
+}
+};
+
+class cow: public Animal, public Herbivore
+{
+    public:
+void talk () {
+cout << "I am a cow" << endl;
+}
+
+};
+
+class cats: public Animal, public Carnivore
+{
+    // cat stuff
+};
+
+class bears: public Animal, public Carnivore
+{
+    // bear stuff
+};
+
+int main()
+{
+    cout << "Hello world!" << endl;
+cow bessie;
+//bessie.animalType = "cow";
+bessie.talk();
+bessie.xivore();
+    return 0;
+}
