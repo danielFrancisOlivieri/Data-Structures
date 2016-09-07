@@ -5,28 +5,32 @@ using namespace std;
  class Animal {
 
 public:
-    //string animalType;  // placeholder, should never be shown to user while uninitialized
+    string lifeFormType = "Animal";  // placeholder, should never be shown to user while uninitialized
+  //  string animalName = "None";
 
 //prints out simple silly message that is adaptable for each class
-/*void talk() {
-cout << "I am a " + animalType + " and one of my hobbies is not being eaten" << endl;
+void talk() {
+cout << "I am a " + lifeFormType + " and one of my hobbies is not being eaten" << endl;
 }
-*/
-Animal () {} ; // how do I get a good error message?
+
+Animal () {
+//cout << animalName + " belongs to the classes: \n" << animalType << "\n" << voreType << "\n" << animalSubtype << endl;
+} ; // how do I get a good error message?
 
 };
 
 class Herbivore {
-
 public:
+    string voreType = "Herbivore";
 void xivore () {
 cout << "I am a herbivore. That means that I don't like to eat things that move." << endl;
 }
 
-
 };
 
 class Carnivore {
+    public:
+         string voreType = "Carnivore";
 void xivore () {
 cout << "I am a carnivore. That means that I like to eat things that move." << endl;
 }
@@ -34,29 +38,95 @@ cout << "I am a carnivore. That means that I like to eat things that move." << e
 
 class cow: public Animal, public Herbivore
 {
-    public:
+public:
+    string animalName = "Cow";
+    cow () {
+    cout <<  lifeFormType << "\n" << voreType << "\n" << animalName << endl;
+    }
+
 void talk () {
 cout << "I am a cow" << endl;
 }
-
 };
 
-class cats: public Animal, public Carnivore
+class Cats: public Animal, public Carnivore
 {
-    // cat stuff
+public:
+    string animalSubtype = "Cats";
+};
+class Bears: public Animal, public Carnivore
+{
+ public:
+    string animalSubtype = "Bears";
 };
 
-class bears: public Animal, public Carnivore
-{
-    // bear stuff
+class cat: public Cats {
+   public:
+       string animalName = "Cat";
+      cat () {
+    cout <<  lifeFormType << "\n" << voreType << "\n" << animalSubtype << "\n" << animalName << endl;
+    }
+void talk () {
+cout << "I am a cat" << endl;
+}
+};
+
+class leopard: public Cats {
+
+  public:
+       string animalName = "Leopard";
+      leopard () {
+    cout <<  lifeFormType << "\n" << voreType << "\n" << animalSubtype << "\n" << animalName << endl;
+    }
+void talk () {
+cout << "I am a leopard" << endl;
+}
+};
+
+class panda: public Bears {
+  public:
+       string animalName = "Panda";
+      panda () {
+    cout <<  lifeFormType << "\n" << voreType << "\n" << animalSubtype << "\n" << animalName << endl;
+    }
+void talk () {
+cout << "I am a panda" << endl;
+}
+};
+
+class polar: public Bears {
+  public:
+       string animalName = "Polar";
+      polar () {
+    cout <<  lifeFormType << "\n" << voreType << "\n" << animalSubtype << "\n" << animalName << endl;
+    }
+void talk () {
+cout << "I am a polar bear" << endl;
+}
 };
 
 int main()
 {
-    cout << "Hello world!" << endl;
+    cout << "Welcome to the zoo!" << endl;
 cow bessie;
 //bessie.animalType = "cow";
 bessie.talk();
 bessie.xivore();
+
+cat sushi;
+sushi.talk();
+sushi.xivore();
+
+leopard hobbes;
+hobbes.talk();
+hobbes.xivore();
+
+panda harambe;
+harambe.talk();
+harambe.xivore();
+
+polar allen;
+allen.talk();
+allen.xivore();
     return 0;
 }
