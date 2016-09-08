@@ -10,9 +10,7 @@ public:
   //  string animalName = "None";
 
 //prints out simple silly message that is adaptable for each class
-virtual void talk() {
-cout << "I am a " + lifeFormType + " and one of my hobbies is not being eaten. \n" << endl;
-}
+virtual void talk();
 
 Animal () {
 
@@ -27,31 +25,23 @@ inline Animal::~Animal() { }
 class Herbivore {
 public:
     string voreType = "Herbivore";
-void xivore () {
-cout << "I am a herbivore. That means that I don't like to eat things that move.\n" << endl;
-}
+void xivore ();
 
 };
 
 class Carnivore {
     public:
          string voreType = "Carnivore";
-void xivore () {
-cout << "I am a carnivore. That means that I like to eat things that move.\n" << endl;
-}
+void xivore () ;
 };
 
 class cow: public Animal, public Herbivore
 {
 public:
     string animalName = "Cow";
- cow () {
-    cout <<  lifeFormType << "\n" << voreType << "\n" << animalName << endl;
-    }
+ cow () ;
 
-void talk () {
-cout << "I am a cow" << endl;
-}
+void talk ();
 };
 
 class Cats: public Animal, public Carnivore
@@ -68,32 +58,22 @@ class Bears: public Animal, public Carnivore
 class cat: public Cats {
    public:
        string animalName = "Cat";
-      cat () {
-    cout <<  lifeFormType << "\n" << voreType << "\n" << animalSubtype << "\n" << animalName << endl;
-    }
-void talk () {
-cout << "I am a cat" << endl;
-}
+      cat ();
+void talk ();
 };
 
 class leopard: public Cats {
 
   public:
        string animalName = "Leopard";
-      leopard () {
-    cout <<  lifeFormType << "\n" << voreType << "\n" << animalSubtype << "\n" << animalName << endl;
-    }
-void talk () {
-cout << "I am a leopard" << endl;
-}
+      leopard ();
+void talk ();
 };
 
 class panda: public Bears {
   public:
        string animalName = "Panda";
-      panda () {
-    cout <<  lifeFormType << "\n" << voreType << "\n" << animalSubtype << "\n" << animalName << endl;
-    }
+      panda ();
 void talk () {
 cout << "I am a panda" << endl;
 }
@@ -102,12 +82,8 @@ cout << "I am a panda" << endl;
 class polar: public Bears {
   public:
        string animalName = "Polar";
-      polar () {
-    cout <<  lifeFormType << "\n" << voreType << "\n" << animalSubtype << "\n" << animalName << endl;
-    }
-void talk () {
-cout << "I am a polar bear" << endl;
-}
+      polar ();
+void talk ();
 };
 
 int main()
@@ -141,4 +117,52 @@ leopard l;
  l.talk( );
  l.xivore( );
     return 0;
+}
+
+
+  void Animal :: talk() {
+cout << "I am a " + lifeFormType + " and one of my hobbies is not being eaten. \n" << endl;
+};
+
+void Herbivore :: xivore () {
+cout << "I am a herbivore. That means that I don't like to eat things that move.\n" << endl;
+}
+
+void Carnivore :: xivore () {
+cout << "I am a carnivore. That means that I like to eat things that move.\n" << endl;
+};
+
+ cow :: cow () {
+    cout <<  lifeFormType << "\n" << voreType << "\n" << animalName << endl;
+    }
+
+void cow :: talk () {
+cout << "I am a cow" << endl;
+}
+
+cat:: cat () {
+    cout <<  lifeFormType << "\n" << voreType << "\n" << animalSubtype << "\n" << animalName << endl;
+    }
+
+void cat :: talk () {
+cout << "I am a cat" << endl;
+}
+
+ leopard :: leopard () {
+    cout <<  lifeFormType << "\n" << voreType << "\n" << animalSubtype << "\n" << animalName << endl;
+    }
+void leopard :: talk () {
+cout << "I am a leopard" << endl;
+}
+
+ panda :: panda () {
+    cout <<  lifeFormType << "\n" << voreType << "\n" << animalSubtype << "\n" << animalName << endl;
+    }
+
+ polar :: polar () {
+    cout <<  lifeFormType << "\n" << voreType << "\n" << animalSubtype << "\n" << animalName << endl;
+    }
+
+void polar :: talk () {
+cout << "I am a polar bear" << endl;
 }
