@@ -1,5 +1,6 @@
 
 
+
 #ifndef H_polynomial
 #define	H_polynomial
 
@@ -12,15 +13,18 @@
 
 #include <iostream>
 #include "arrayListType.h"
+# include "complexType.h"
 
 using namespace std;
 
-class polynomialType: public arrayListType<double>
+class polynomialType: public arrayListType<complexType>
 {
     friend ostream& operator<<(ostream&, const polynomialType&);
       //Overloads the stream insertion operator
     friend istream& operator>>(istream&, polynomialType&);
       //Overloads the stream extraction operator
+    friend polynomialType operator~( polynomialType&);
+
 public:
     polynomialType operator+(const polynomialType&);
       //Overloads the operator +
@@ -29,7 +33,7 @@ public:
     polynomialType operator*(const polynomialType&);
       //Overloads the operator *
 
-    double operator() (double x);
+    complexType operator() (complexType x);
       //Overloads the operator () to evaluate the polynomial at
       //a given point
       //Postcondition: The value of the polynomial at x is

@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1473917008 source:c:\users\olivierid\desktop\lab-3-part-ii\main.cpp
+	<iostream>
+	"polynomialType.h"
+	"complexType.h"
+
+1473916381 c:\users\olivierid\desktop\lab-3-part-ii\polynomialtype.h
+	<iostream>
+	"arrayListType.h"
+	"complexType.h"
+
+1473902020 c:\users\olivierid\desktop\lab-3-part-ii\arraylisttype.h
+	<iostream>
+	<cassert>
+
+1473916387 source:c:\users\olivierid\desktop\lab-3-part-ii\polynomialtypelmp.cpp
+	"complexType.h"
+	"polynomialType.h"
+	<cmath>
+
+1473905836 c:\users\olivierid\desktop\lab-3-part-ii\complextype.h
+	<math.h>
+	<iostream>
+
+1473909959 source:c:\users\olivierid\desktop\lab-3-part-ii\complextypeimp.cpp
+	<iostream>
+	"complexType.h"
+	<math.h>
+
