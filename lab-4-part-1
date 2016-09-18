@@ -1,0 +1,76 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+
+template<class elemtype>
+void reverseVector(vector<elemType> &list);
+
+
+int main()
+{
+int tempNumb, i = 0, maximum, minimum;
+double setSize,  temp = 0;
+    std:: vector <int> realNumberVec;
+    cout << "How many numbers are in the set you would like to input?" << endl << endl;
+    cin >> setSize;
+
+    cout << "Please enter the numbers in your set." << endl;
+    while (i < setSize) {
+
+        cin>> tempNumb;
+        realNumberVec.push_back(tempNumb);
+        i++;
+    }
+//std :: cout << "(*): " << *std:: min_element(0, realNumberVec.size()-1);
+i = 0;
+minimum = realNumberVec[0];
+
+  while (i < setSize) {
+if ( minimum > realNumberVec[i] ) {
+
+    minimum = realNumberVec[i];
+
+}
+ i++;
+    }
+    i = 0;
+maximum = realNumberVec[0];
+
+  while (i < setSize) {
+if ( maximum < realNumberVec[i] ) {
+
+    maximum = realNumberVec[i];
+
+}
+ i++;
+    }
+ i = 0;
+
+      while (i < setSize) {
+
+temp = temp + realNumberVec[i];
+
+ i++;
+    }
+
+   double average = 0;
+   average = temp / setSize;
+
+    for (int i =0; i < realNumberVec.size(); i++) {
+        cout<< "Yerk: " << realNumberVec[i] <<endl;
+    }
+
+
+    cout << "Here is the highest number in the set: " << maximum<< endl;
+    cout << "Here is the lowest number in the set: " << minimum <<  endl;
+    cout << "Here is the average number in the set: " << average << endl;
+    return 0;
+}
+
+void reverseVector(vector<vector<elemType> &list) {
+cout << "working" << endl;
+}
+
