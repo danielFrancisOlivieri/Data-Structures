@@ -1,0 +1,221 @@
+
+
+# include "complexType.h"
+#include "polynomialType.h"
+#include <cmath>
+using namespace std;
+
+// constructor
+polynomialType::polynomialType(int size)
+               : arrayListType<complexType>(size)
+
+{
+    length = size;
+
+    for (int i = 0; i < size; i++)
+        list[i] = 0;
+}
+
+
+complexType polynomialType::operator() (complexType x)
+{
+    complexType value(0,0);
+
+complexType var(0,0);
+
+
+    for (int i = 0; i < length; i++){
+complexType temp(1,0);
+
+         if (i == 1) {
+            temp.setComplex(x.getReal(), x.getImaginary());
+        }
+        else if (i == 2) {
+            temp = x * x;
+            cout << "temp is: " << temp << " when x is " << x << endl;
+        }
+        else if (i > 2) {
+
+            int m = 1;
+            temp.setComplex(x.getReal(), x.getImaginary());
+            while (i > m) {
+                temp = temp * x;
+                m++;
+            }
+        }
+
+    var = var + (temp * list[i]);
+       cout << " temp: " << temp << " list: " << list[i] << endl;
+    cout << " var: " << var << endl;
+    }
+
+
+    return var;
+}
+
+//does seem to need much changing as long as the complex number addition operator is working
+polynomialType polynomialType::operator+
+                              (const polynomialType& right)
+{
+    int size = max(length, right.length);
+//cout << "this is the size: " << size << endl;
+    polynomialType temp(size); //polynomial to store the sum
+
+    for (int i = 0; i < min(length, right.length); i++){
+         temp.list[i] = list[i] + right.list[i]; // this is where the addition happens
+//cout << "List: " << list[i] << " " << "right list: " << right.list[i] << " Both: " << temp.list[i] << endl;
+    }
+
+    if (size == length)
+        for (int i = min(length, right.length); i < length; i++)
+            temp.list[i] = list[i];
+    else
+        for (int i = min(length, right.length); i < right.length;
+                                                i++)
+            temp.list[i] = right.list[i];
+
+    return temp;
+}
+
+polynomialType polynomialType::operator-
+                               (const polynomialType& right)
+{
+    int size = max(length, right.length);
+
+    polynomialType temp(size); //polynomial to store the difference
+
+    for (int i = 0; i < min(length, right.length); i++) {
+        temp.list[i] = list[i] - right.list[i]; // where subtraction happens
+    }
+    if (size == length)
+        for (int i = min(length, right.length); i < length; i++) {
+            temp.list[i] = list[i];
+            }
+    else
+        for (int i = min(length, right.length); i < right.length;
+                                                i++) {
+                    complexType negative(-1, -1);
+            temp.list[i] = right.list[i] * negative; //-right.list[i];
+                                                }
+    return temp;
+}
+
+polynomialType polynomialType::operator*
+               (const polynomialType& right)
+{
+//    int newLength = (length + right.list.lenth) -1;
+	polynomialType temp(15); //= right;
+
+    for(int i = 0; i < length; i ++) {
+        for(int m = 0; m < right.length; m ++) {
+
+        int exponent = i + m;
+
+        temp.list[exponent] = (list[i] * right.list[m]) + temp.list[exponent] ;
+        }
+    }
+
+	return temp;
+}
+
+int polynomialType::min(int x, int y) const
+{
+	if (x <= y)
+		return x;
+	else
+		return y;
+}
+
+int polynomialType::max(int x, int y) const
+{
+	if (x >= y)
+		return x;
+	else
+		return y;
+}
+
+ polynomialType operator~( polynomialType& p) {
+//can probably delete
+
+polynomialType alt(p.length -1);
+ int indexFirstNonzeroCoeff = 0;
+
+// do the arithematic with just the numbers and then initialize a complexType to be put into the list
+for (int i = 0; i < p.length; i++) {
+
+double imaginary, real;
+
+real = p.list[i].getReal() * i;
+
+imaginary = p.list[i].getImaginary() * i;
+int m = i - 1;
+cout << "i: " << i << "i minus 1: " << i-1 << endl;
+complexType temp(real, imaginary);
+alt.list[m] = temp;
+
+}
+
+// the problem: that it's printing out too many elements
+return alt;
+}
+
+
+ostream& operator<<(ostream& os, const polynomialType& p)
+{
+   int indexFirstNonzeroCoeff = 0;
+
+   for (int i = 0; i < p.length; i++)  //determine the index of the
+                                   //first nonzero coefficient
+        if ((p.list[i].getImaginary() != 0) || (p.list[i].getReal() != 0))
+        {
+            indexFirstNonzeroCoeff = i;
+            break;
+        }
+
+    if (indexFirstNonzeroCoeff < p.length)
+    {
+        if (indexFirstNonzeroCoeff == 0)
+            os << p.list[indexFirstNonzeroCoeff] << " ";
+        else
+            os << p.list[indexFirstNonzeroCoeff] << "x^"
+               << indexFirstNonzeroCoeff << " ";
+
+
+        for (int i = indexFirstNonzeroCoeff + 1; i < p.length; i++)
+        {
+            if ((p.list[i].getImaginary() != 0) || (p.list[i].getReal() != 0))
+                if ((p.list[i].getImaginary() != 0) || (p.list[i].getReal() != 0)) {
+                    os << "+ " << p.list[i] << "x^" << i << " ";
+
+}                else {
+    complexType negative(-1, -1);
+                    os << "- " << p.list[i] * negative << "x^" << i << " ";
+
+}
+        }
+    }
+    else
+        os << "0";
+
+    return os;
+}
+
+istream& operator>>(istream& is, polynomialType& p)
+{
+    cout << "The degree of this polynomial is: "
+         << p.length - 1 << endl;
+
+    for (int i = 0; i < p.length; i++)
+    {
+        //double real, img;
+        complexType temp;
+        cout << "Enter the coefficient of x^" << i << " as a complex number or double, first the real part and then the imaginary part: ";
+        is >> temp;
+       // complexType temp(real, img);
+        p.list[i] = temp;
+    }
+
+    return is;
+}
+
+
